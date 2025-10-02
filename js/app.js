@@ -6,4 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = menu.classList.toggle('open');
         menu.setAttribute('aria-hidden', !isOpen);
     });
+
+    // закриття меню при натисканні на посилання
+    menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.remove('open');
+            menu.setAttribute('aria-hidden', true);
+        });
+    });
 });
