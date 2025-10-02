@@ -15,3 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('sideMenu');
+
+    btn.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('open');
+
+        // для доступності
+        menu.setAttribute('aria-hidden', !isOpen);
+
+        // анімація ліній
+        btn.classList.toggle('active');
+    });
+});
