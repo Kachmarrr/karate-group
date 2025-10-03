@@ -2,97 +2,229 @@
     --bg: #ffffff;
     --text: #000000;
     --header-h: 56px;
+    --primary-color: #c62828;
+    --hover-color: #a81e1e;
 }
 
-/* скидання */
-* { box-sizing: border-box; }
-html, body { height:100%; margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--text); }
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* header */
+html, body {
+    height: 100%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    color: var(--text);
+}
+
+/* HEADER */
 .site-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: var(--header-h);
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:0 12px;
-    border-bottom:1px solid #eee;
-    background:var(--bg);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+    border-bottom: 1px solid #eee;
+    background: var(--bg);
     z-index: 1100;
 }
 
-/* кнопка гамбургер */
+/* HAMBURGER */
 .hamburger {
     width: 44px;
     height: 44px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-around;
-    align-items:center;
-    padding:6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 6px;
     background: transparent;
     border: 1px solid #ccc;
-    border-radius:6px;
+    border-radius: 6px;
     cursor: pointer;
     z-index: 1110;
 }
-.hamburger:focus { outline: 2px solid #007bff; }
 
-/* лінії */
 .hamburger span {
-    display:block;
+    display: block;
     width: 22px;
     height: 3px;
-    background:#333;
-    border-radius:2px;
+    background: #333;
+    border-radius: 2px;
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* анімація відкриття */
-.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 3px); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -3px); }
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 3px);
+}
 
-/* бічне меню - початково приховано (знизу header) */
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(3px, -3px);
+}
+
+/* SIDE MENU */
 .side-menu {
     position: fixed;
-    left: 0;
     top: var(--header-h);
+    left: 0;
     bottom: 0;
-    width: 260px;
-    background:var(--bg);
-    border-right:1px solid #eee;
+    width: 70%;
+    max-width: 260px;
+    background: var(--bg);
+    border-right: 1px solid #eee;
     transform: translateX(-320px);
-    transition: transform .22s ease;
+    transition: transform 0.22s ease;
     padding: 12px;
-    overflow:auto;
+    overflow-y: auto;
     z-index: 1000;
 }
-.side-menu.open { transform: translateX(0); }
 
-.side-menu ul { list-style:none; padding:0; margin:0; }
-.side-menu a { display:block; padding:10px 12px; text-decoration:none; color:var(--text); border-radius:6px; }
-.side-menu a:hover { background:#f0f0f0; }
-
-/* основний контент */
-.content {
-    padding: calc(var(--header-h) + 16px) 20px 40px 20px;
-    max-width:900px;
-    margin:0 auto;
+.side-menu.open {
+    transform: translateX(0);
 }
 
-/* великий екран - показувати меню завжди */
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu a {
+    display: block;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: var(--text);
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.side-menu a:hover {
+    background: #f0f0f0;
+}
+
+/* DESKTOP LAYOUT */
 @media (min-width: 800px) {
-    .side-menu { transform: translateX(0); position: fixed; width: 220px; top: var(--header-h); }
-    .content { margin-left: 260px; padding-top: calc(var(--header-h) + 16px); }
-    .hamburger { display:none; }
+    .side-menu {
+        transform: translateX(0);
+        width: 220px;
+        top: var(--header-h);
+    }
+
+    .content {
+        margin-left: 260px;
+        padding-top: calc(var(--header-h) + 16px);
+    }
+
+    .hamburger {
+        display: none;
+    }
 }
 
-/* мобільні */
+/* PAGE HEADER */
+.page-header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* MAIN CONTENT */
+main {
+    max-width: 800px;
+    margin: calc(var(--header-h) + 2rem) auto 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: inherit; /* стандартний колір */
+}
+
+h2.page-title {
+    color: var(--primary-color);
+}
+
+
+/* PLEDGE LIST */
+.pledge-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pledge-list li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.pledge-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+/* BUTTONS */
+.button-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover, button:focus {
+    background-color: var(--hover-color);
+    outline: none;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 2rem;
+}
+
+h1.title {
+    font-size: 2rem; /* базовий розмір для десктопу */
+    text-align: center;
+    margin: 1rem 0;
+    word-wrap: break-word; /* дозволяє переносити слова */
+}
+
 @media (max-width: 799px) {
-    .side-menu { width: 70%; }
-    .content { padding-top: calc(var(--header-h) + 16px); }
+    h1.title {
+        font-size: 1.5rem; /* зменшуємо для мобільних */
+        padding: 0 12px; /* відступи з боків, щоб не приліпав до екрану */
+    }
 }
