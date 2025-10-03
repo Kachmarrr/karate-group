@@ -1,10 +1,10 @@
 :root {
     --bg: #ffffff;
     --text: #000000;
-    --header-h: 56px; /* висота header */
+    --header-h: 56px;
 }
 
-/* базові скидання */
+/* скидання */
 * { box-sizing: border-box; }
 html, body { height:100%; margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--text); }
 
@@ -21,26 +21,55 @@ html, body { height:100%; margin:0; font-family: Arial, sans-serif; background:v
     padding:0 12px;
     border-bottom:1px solid #eee;
     background:var(--bg);
-    z-index: 100;
+    z-index: 1100;
 }
 
-/* гамбургер */
-.hamburger { font-size:24px; background:none; border:none; cursor:pointer; }
+/* кнопка гамбургер */
+.hamburger {
+    width: 44px;
+    height: 44px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    padding:6px;
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius:6px;
+    cursor: pointer;
+    z-index: 1110;
+}
+.hamburger:focus { outline: 2px solid #007bff; }
 
-/* меню ліворуч */
+/* лінії */
+.hamburger span {
+    display:block;
+    width: 22px;
+    height: 3px;
+    background:#333;
+    border-radius:2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* анімація відкриття */
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 3px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -3px); }
+
+/* бічне меню - початково приховано (знизу header) */
 .side-menu {
     position: fixed;
     left: 0;
     top: var(--header-h);
     bottom: 0;
-    width: 220px;
+    width: 260px;
     background:var(--bg);
     border-right:1px solid #eee;
-    transform: translateX(-260px);
+    transform: translateX(-320px);
     transition: transform .22s ease;
     padding: 12px;
     overflow:auto;
-    z-index: 90;
+    z-index: 1000;
 }
 .side-menu.open { transform: translateX(0); }
 
@@ -48,103 +77,22 @@ html, body { height:100%; margin:0; font-family: Arial, sans-serif; background:v
 .side-menu a { display:block; padding:10px 12px; text-decoration:none; color:var(--text); border-radius:6px; }
 .side-menu a:hover { background:#f0f0f0; }
 
-/* контент */
+/* основний контент */
 .content {
     padding: calc(var(--header-h) + 16px) 20px 40px 20px;
     max-width:900px;
     margin:0 auto;
 }
 
-/* кнопки */
-.button {
-    display:inline-block;
-    min-width:48px;
-    min-height:48px;
-    padding:12px 20px;
-    font-size:16px;
-    border:none;
-    border-radius:8px;
-    background:#007bff;
-    color:#fff;
-    cursor:pointer;
-    transition: background .2s;
-    text-align:center;
-}
-.button:hover { background:#0056b3; }
-
-/* адаптивність для широких екранів */
+/* великий екран - показувати меню завжди */
 @media (min-width: 800px) {
-    .side-menu { transform: translateX(0); position: fixed; width: 220px; }
+    .side-menu { transform: translateX(0); position: fixed; width: 220px; top: var(--header-h); }
     .content { margin-left: 260px; padding-top: calc(var(--header-h) + 16px); }
     .hamburger { display:none; }
 }
 
-/* адаптивність для вузьких екранів */
+/* мобільні */
 @media (max-width: 799px) {
-    .side-menu { width: 260px; }
+    .side-menu { width: 70%; }
     .content { padding-top: calc(var(--header-h) + 16px); }
-}
-
-
-/* Кнопка гамбургер */
-#hamburger {
-    position: relative;
-    z-index: 1000;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 5px;
-    background: transparent;
-    border: none;
-}
-
-/* Лінії гамбургера */
-#hamburger span {
-    display: block;
-    height: 4px;
-    width: 100%;
-    background: #333;
-    border-radius: 2px;
-    transition: 0.3s;
-}
-
-/* Меню збоку */
-#sideMenu {
-    position: fixed;
-    top: 0;
-    left: -250px; /* ховаємо за екран */
-    width: 250px;
-    height: 100%;
-    background-color: #f2f2f2;
-    transition: left 0.3s ease;
-    z-index: 900;
-}
-
-/* Відкриття меню */
-#sideMenu.open {
-    left: 0;
-}
-
-/* Для мобільних */
-@media (max-width: 768px) {
-    #hamburger {
-        width: 50px;
-        height: 50px;
-    }
-    #sideMenu {
-        width: 70%;
-    }
-}
-
-#hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-#hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-#hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
 }
